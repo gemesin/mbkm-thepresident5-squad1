@@ -1,42 +1,44 @@
 const express = require('express');
 const { userModel } = require("../../models");
 const validationRegister = require('../../middlewares/register.validation');
-const {body, validationResult} = require('express-validator');
-const errorHandler = require('../../middlewares/error.handler');
-const checkValidasi = require('../../middlewares/register.validation');
+const {validationResult} = require('express-validator');
+const bcrypt = require("bcrypt");
 
 const router = express.Router();
 
-router.post("/register", validationRegister, async (req, res) => {
-    const { nama, email, password } = req.body;
-    
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-    }
+router.post("/register", validationRegister, async (req, res, next) => {
+    const { nama, email, password, konfirmasiPassword } = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const hashPassword = bcrypt.hashSync(password, salt);
 
-    const createUser = await userModel.create({
-        nama: nama,
-        email: email,
-        password: password,
-        
-    });
-    return res.status(201)
-        .json({
-            message: "Berhasil registrasi",
+    try {
+        validationResult(req).throw();
+        const createUser = await userModel.create({
+            nama: nama,
+            email: email,
+            password: hashPassword,
+        });
+
+        return res.status(201).json({
+            msg: "Berhasil registrasi",
             data: createUser,
         });
+    } catch (error) {
+        return res.status(400).json({ error: error.mapped() });
+    }
 });
+
+
+
 
 router.get("/register", async (req, res) => {
     const dataUser = await userModel.findAll();
 
     return res.status(200)
         .json({
-            message: "Berhasil mendapatkan semua data user.",
+            msg: "Berhasil mendapatkan semua data user.",
             data: dataUser,
         });
 });
 
-router.use(errorHandler)
 module.exports = router;

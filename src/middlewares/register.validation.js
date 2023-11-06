@@ -20,7 +20,14 @@ const checkValidasi = [
     body("password")
         .notEmpty().withMessage("wajib diisi")
         .isLength({ min: 8 }).withMessage("minimal 8 karakter")
-        .matches(/[\W_]/).withMessage("minimal 1 simbol")
+        .matches(/[\W_]/).withMessage("minimal 1 simbol"),
+    body('konfirmasiPassword')
+        .custom((value, { req }) => {
+          if (value !== req.body.password) {
+            throw new Error('Pasword tidak sama');
+          }
+          return true;
+        }),
 ];
 
 module.exports = checkValidasi;
