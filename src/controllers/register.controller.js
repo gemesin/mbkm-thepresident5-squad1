@@ -1,6 +1,6 @@
 const express = require('express');
-const { userModel } = require("../../models");
-const validationRegister = require('../../middlewares/register.validation');
+const { userModel } = require("../models");
+const validationRegister = require('../middlewares/register.validation');
 const {validationResult} = require('express-validator');
 const bcrypt = require("bcrypt");
 
@@ -19,17 +19,20 @@ router.post("/register", validationRegister, async (req, res, next) => {
             password: hashPassword,
         });
 
+        
         return res.status(201).json({
             msg: "Berhasil registrasi",
-            data: createUser,
+            data: {
+                id: createUser.id,
+                nama: createUser.nama,
+                email: createUser.email
+            }
         });
+
     } catch (error) {
         return res.status(400).json({ error: error.mapped() });
     }
 });
-
-
-
 
 router.get("/register", async (req, res) => {
     const dataUser = await userModel.findAll();
