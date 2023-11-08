@@ -28,6 +28,8 @@ app.listen(PORT, () => {
     console.log(`api started at ${PORT}`);
 });
 
-
+app.get('/', (res) => {
+    res.json({msg: "testing ke server"})
+})
 
 
