@@ -44,4 +44,8 @@ router.get("/register", async (req, res) => {
         });
 });
 
+router.get('/testing', (res) => {
+    return res.send("dsafds")
+})
+
 module.exports = router;

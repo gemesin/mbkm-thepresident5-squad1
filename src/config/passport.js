@@ -5,7 +5,7 @@ const passportJWT = require('passport-jwt');
 let ExtractJwt = passportJWT.ExtractJwt;
 let JwtStrategy = passportJWT.Strategy;
 
-let jwtOptions = {};
+const jwtOptions = {};
 jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 jwtOptions.secretOrKey = 'kelompok-1-jayajayajaya';
 

@@ -1,9 +1,19 @@
+// const dbConfig = {
+//     HOST: 'localhost',
+//     USER: 'root',
+//     DB: 'final',
+//     DIALECT: 'mysql',
+//     PORT: 3306
+// };
+
+// Buat ke server
 const dbConfig = {
-    HOST: 'localhost',
+    HOST: '195.35.32.179',
     USER: 'root',
-    DB: 'final',
+    PASSWORD: 'root@msib',
+    DB: 'msib_squad1',
     DIALECT: 'mysql',
-    PORT: 3306
+    PORT: 4000
 };
 
 module.exports = dbConfig;

@@ -1,26 +1,37 @@
 const express = require('express');
-const passport = require('passport');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { userModel } = require("../models");
+const jwtOptions = {
+    secretOrKey: 'kelompok-1-jayajayajaya'
+};
 
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
     const { email, password } = req.body;
     if (email && password) {
-        const dataUser = await new userModel({ email: email });
+        const dataUser = await userModel.findOne({ where: { email: email } });
         if (!dataUser) {
-          res.status(401).json({ message: 'Email atau password invalid' });
+            return res.status(401).json({ message: 'Email atau password invalid' });
         }
-        console.log(dataUser.email);
-        if (dataUser.password === password) {
-          let payload = { id: dataUser.id };
-          let token = jwt.sign(payload, jwtOptions.secretOrKey);
-          res.json({ msg: 'ok', token: token });
+
+        const userPassword = dataUser.password;
+
+        // Membandingkan password yang diberikan oleh pengguna dengan hash password dalam database
+        const isMatch = bcrypt.compareSync(password, userPassword);
+        if (isMatch) {
+            let payload = { id: dataUser.id };
+            let token = jwt.sign(payload, jwtOptions.secretOrKey);
+            return res.json({ 
+                msg: 'Berhasil login', 
+                token: token 
+            });
         } else {
-          res.status(401).json({ msg: 'Email atau password invalid' });
+            return res.status(401).json({ msg: 'Email atau password invalid' });
         }
-      }
+    }
 });
+
 
 module.exports = router;
