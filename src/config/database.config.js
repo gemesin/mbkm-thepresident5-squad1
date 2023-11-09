@@ -8,7 +8,7 @@
 
 // Buat ke server
 const dbConfig = {
-    HOST: ' ',
+    HOST: 'msib-mysql-db',
     USER: 'root',
     PASSWORD: 'root@msib',
     DB: 'msib_squad1',
