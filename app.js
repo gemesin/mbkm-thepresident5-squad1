@@ -8,12 +8,14 @@ const passport = require('passport')
 
 const app = express();
 
+app.use(passport.initialize());
+
 app.use(express.json());
 app.use(register);
 app.use(login);
 app.use(auth);
 app.use(artikel);
-app.use(passport.initialize());
+
 
 const PORT = 8001;
 

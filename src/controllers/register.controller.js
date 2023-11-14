@@ -34,14 +34,4 @@ router.post("/register", validationRegister, async (req, res, next) => {
     }
 });
 
-router.get("/register", async (req, res) => {
-    const dataUser = await userModel.findAll();
-
-    return res.status(200)
-        .json({
-            msg: "Berhasil mendapatkan semua data user.",
-            data: dataUser,
-        });
-});
-
 module.exports = router;

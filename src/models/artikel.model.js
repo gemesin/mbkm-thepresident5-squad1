@@ -20,6 +20,12 @@ module.exports = (sequelize, Sequelize) => {
         deskripsi: {
             type: Sequelize.TEXT,
         },
+        isi: {
+            type: Sequelize.TEXT,
+        },
+        nama_pembuat: {
+            type: Sequelize.STRING,
+        },
     });
 
     return Artikel;

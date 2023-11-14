@@ -6,7 +6,7 @@ const checkValidasi = [
         .notEmpty().withMessage("wajib diisi"),
     body("email")
         .notEmpty().withMessage("wajib diisi")
-        .isEmail().withMessage("format harus benar")
+        .isEmail().withMessage("format email harus benar")
         .custom(async (email, { req }) => {
             const existingUser = await userModel.findOne({
                 where: {

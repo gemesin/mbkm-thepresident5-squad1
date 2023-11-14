@@ -1,23 +1,24 @@
-// config/passport.js
 const passport = require('passport');
-const passportJWT = require('passport-jwt');
+const db = require('../models');
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
-let ExtractJwt = passportJWT.ExtractJwt;
-let JwtStrategy = passportJWT.Strategy;
+var opts = {}
+opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
+opts.secretOrKey = 'secret';
 
-const jwtOptions = {};
-jwtOptions.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
-jwtOptions.secretOrKey = 'kelompok-1-jayajayajaya';
-
-let strategy = new JwtStrategy(jwtOptions, function(jwt_payload, next) {
-  console.log('payload received', jwt_payload);
-  let user = getUser({ id: jwt_payload.id });
-
-  if (user) {
-    next(null, user);
-  } else {
-    next(null, false);
-  }
-});
-
-passport.use(strategy);
+passport.use(new JwtStrategy(opts, async (jwt_payload, done) => {
+    try {
+        const user = await db.userModel.findOne({ where: { id: jwt_payload.id } });
+    
+        if (user) {
+          return done(null, user);
+        } else {
+          return done(null, false);
+        }
+      } catch (error) {
+        return done(error, false);
+      }
+}));
+  
+module.exports = passport;
