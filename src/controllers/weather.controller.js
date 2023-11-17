@@ -1,5 +1,4 @@
 const express = require('express');
-const weather = require('../models/weather.model');
 
 async function getCurrentWeatherController(req, res) {
   const { latitude, longitude } = req.params;
@@ -8,7 +7,7 @@ async function getCurrentWeatherController(req, res) {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
     const currentWeatherEndpoint = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
-    const response = await weather(currentWeatherEndpoint);
+    const response = await fetch(currentWeatherEndpoint);
     const currentWeatherData = await response.json();
 
     const currentWeather = {
@@ -31,7 +30,7 @@ async function getWeeklyWeatherController(req, res) {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
     const weeklyWeatherEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
 
-    const response = await weather(weeklyWeatherEndpoint);
+    const response = await fetch(weeklyWeatherEndpoint);
     const weeklyWeatherData = await response.json();
 
     const weeklyWeather = weeklyWeatherData.list.map((item) => ({
