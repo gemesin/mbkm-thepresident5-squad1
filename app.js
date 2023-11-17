@@ -3,6 +3,7 @@ const register = require("./src/routes/register.route")
 const login = require("./src/routes/login.route")
 const auth = require('./src/routes/auth.route');
 const artikel = require('./src/routes/artikel.route');
+const weather = require('./src/routes/weather.route');
 const db = require("./src/models/index");
 const passport = require('passport')
 
@@ -15,6 +16,7 @@ app.use(register);
 app.use(login);
 app.use(auth);
 app.use(artikel);
+app.use(weather);
 
 
 const PORT = 8001;
