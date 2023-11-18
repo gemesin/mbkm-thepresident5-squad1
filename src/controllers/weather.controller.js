@@ -29,7 +29,7 @@ async function getCurrentWeatherController(req, res) {
     res.json({ currentWeather });
   } catch (error) {
     console.error(error);
-    res.status(500).send('Terjadi kesalahan dalam mengambil data cuaca terkini.');
+    res.status(500).json({msg: 'Terjadi kesalahan dalam mengambil data cuaca terkini.'});
   }
 }
 
@@ -61,7 +61,7 @@ async function getWeeklyWeatherController(req, res) {
     res.json(weeklyWeather);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Terjadi kesalahan dalam mengambil data cuaca mingguan.');
+    res.status(500).json({msg: 'Terjadi kesalahan dalam mengambil data cuaca terkini.'});
   }
 }
 
