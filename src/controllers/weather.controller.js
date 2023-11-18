@@ -1,21 +1,31 @@
 const express = require('express');
+const {weatherModel} = require("../models");
 
 async function getCurrentWeatherController(req, res) {
-  const { latitude, longitude } = req.params;
+  const { latitude, longitude } = req.query;
 
   try {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
-    const currentWeatherEndpoint = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    const currentWeatherEndpoint = `http://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&lang=id&units=metric`;
 
     const response = await fetch(currentWeatherEndpoint);
     const currentWeatherData = await response.json();
 
     const currentWeather = {
       temperature: currentWeatherData.main.temp,
+      main: currentWeatherData.weather[0].main,
+      humidity: currentWeatherData.main.humidity,
+      "wind speed": currentWeatherData.wind.speed,
       description: currentWeatherData.weather[0].description,
+      location: currentWeatherData.name,
       icon: currentWeatherData.weather[0].icon,
     };
 
+    const weatherIcon = await weatherModel.findOne({
+      where: {icon: currentWeather.icon}
+    })
+
+    currentWeather.path = weatherIcon.path
     res.json({ currentWeather });
   } catch (error) {
     console.error(error);
@@ -24,26 +34,31 @@ async function getCurrentWeatherController(req, res) {
 }
 
 async function getWeeklyWeatherController(req, res) {
-  const { latitude, longitude } = req.params;
+  const { latitude, longitude } = req.query;
 
   try {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
-    const weeklyWeatherEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+    const weeklyWeatherEndpoint = `http://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&lang=id&appid=${apiKey}&units=metric`;
 
     const response = await fetch(weeklyWeatherEndpoint);
     const weeklyWeatherData = await response.json();
 
     const weeklyWeather = weeklyWeatherData.list.map((item) => ({
       date: new Date(item.dt * 1000),
-      temperature: {
-        min: item.main.temp_min,
-        max: item.main.temp_max,
-      },
+      temperature: item.main.temp,
+      main: item.weather[0].main,
       description: item.weather[0].description,
       icon: item.weather[0].icon,
     }));
 
-    res.json({ weeklyWeather });
+    for (const weatherItem of weeklyWeather) {
+      const weatherIcon = await weatherModel.findOne({
+        where: { icon: weatherItem.icon }
+      });
+      weatherItem.path = weatherIcon.path;
+    }
+    
+    res.json(weeklyWeather);
   } catch (error) {
     console.error(error);
     res.status(500).send('Terjadi kesalahan dalam mengambil data cuaca mingguan.');
