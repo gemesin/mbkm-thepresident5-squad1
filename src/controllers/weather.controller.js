@@ -1,7 +1,7 @@
 const express = require('express');
 
 async function getCurrentWeatherController(req, res) {
-  const { latitude, longitude } = req.params;
+  const { latitude, longitude } = req.query;
 
   try {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
@@ -24,7 +24,7 @@ async function getCurrentWeatherController(req, res) {
 }
 
 async function getWeeklyWeatherController(req, res) {
-  const { latitude, longitude } = req.params;
+  const { latitude, longitude } = req.query;
 
   try {
     const apiKey = '46c6c92b227b811959df28fc16e0e637';
