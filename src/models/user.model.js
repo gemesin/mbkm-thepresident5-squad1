@@ -25,9 +25,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             defaultValue: Sequelize.literal('NOW()'),
         },
-        photo: {
-            type: Sequelize.STRING,
-        }
+    
     });
 
     return User;

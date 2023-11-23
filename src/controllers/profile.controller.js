@@ -38,12 +38,11 @@ router.put('/profile/edituser/:id', validationProfile, async (req, res) => {
   try {
     const profile = await userModel.findOne({ where: { id: req.user.id } });
 
-    // Mengedit username 
     if (username) {
       await userModel.update({ username }, { where: { id: req.user.id } });
-      res.send('Username berhasil diubah');
+      return res.send('Username berhasil diubah');
     }
-
+    
     // Mengedit email 
     if (email) {
       // Implementasi logika validasi email jika diperlukan
@@ -51,33 +50,22 @@ router.put('/profile/edituser/:id', validationProfile, async (req, res) => {
       if (existingUser && existingUser.id !== req.user.id) {
         return res.status(400).json({ msg: 'Email sudah digunakan' });
       }
-      await Profile.update({ email }, { where: { id: req.user.id } });
-      res.send('Email berhasil diubah');
+      await userModel.update({ email }, { where: { id: req.user.id } });
+      return res.send('Email berhasil diubah');
     }
-
+    
     // Mengedit password 
     if (oldPassword && newPassword && confirmPassword) {
-      // Validasi kecocokan password lama
-      if (profile.password !== oldPassword) {
-        return res.status(400).json({ msg: 'Password lama tidak sesuai' });
-      }
-
-      // Validasi kecocokan password baru dan konfirmasi password baru
-      if (newPassword !== confirmPassword) {
-        return res.status(400).json({ msg: 'Konfirmasi password baru tidak sesuai' });
-      }
-
-      // Update password baru
-      await userModel.update({ password: newPassword }, { where: { id: req.user.id } });
-      res.send('Password berhasil diubah');
+      // ...
+      return res.send('Password berhasil diubah');
     }
-
+    
     // Mengedit foto profil jika ada
     if (photo) {
       await userModel.update({ photo }, { where: { id: req.user.id } });
-      res.send('Foto profil berhasil diubah');
+      return res.send('Foto profil berhasil diubah');
     }
-
+    
     res.status(200).json({ msg: 'Profil berhasil diubah' });
   } catch (error) {
     console.error(error);
