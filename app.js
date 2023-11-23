@@ -2,6 +2,7 @@ const express = require("express")
 const register = require("./src/routes/register.route")
 const login = require("./src/routes/login.route")
 const auth = require('./src/routes/auth.route');
+const profile = require('./src/routes/profile.route');
 const artikel = require('./src/routes/artikel.route');
 const weather = require('./src/routes/weather.route');
 const db = require("./src/models/index");
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(register);
 app.use(login);
 app.use(auth);
+app.use(profile);
 app.use(artikel);
 app.use(weather);
 
