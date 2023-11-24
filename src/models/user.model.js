@@ -11,8 +11,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         email: {
             type: Sequelize.STRING,
+            unique: true,
         },
         password: {
+            type: Sequelize.STRING
+        },
+        photo: {
             type: Sequelize.STRING
         },
         createdAt: {
