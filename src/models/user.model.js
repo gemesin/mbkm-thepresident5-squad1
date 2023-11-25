@@ -11,21 +11,11 @@ module.exports = (sequelize, Sequelize) => {
         },
         email: {
             type: Sequelize.STRING,
+            unique: true,
         },
         password: {
             type: Sequelize.STRING
         },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('NOW()'),
-        },
-        updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('NOW()'),
-        },
-    
     });
 
     return User;

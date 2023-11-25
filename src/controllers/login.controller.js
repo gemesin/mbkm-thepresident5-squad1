@@ -3,9 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { userModel } = require("../models");
 const passport = require('../config/passport')
-const jwtOptions = {
-    secretOrKey: 'secret'
-};
+const jwtOptions = {secretOrKey: 'secret'};
 
 const router = express.Router();
 
