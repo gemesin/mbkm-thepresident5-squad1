@@ -3,7 +3,6 @@ const { userModel } = require('../models');
 const bcrypt = require('bcrypt');
 
 const validationPass = [
-
   body('oldPassword')
     .notEmpty().withMessage('kata sandi lama tidak boleh kosong'),
   body('newPassword')

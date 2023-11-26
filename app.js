@@ -20,6 +20,8 @@ app.use(profile);
 app.use(artikel);
 app.use(weather);
 
+app.use('/uploads',express.static('uploads'));
+
 
 const PORT = 8001;
 

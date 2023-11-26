@@ -9,7 +9,6 @@ const { validationResult } = require('express-validator');
 const { userModel } = require('../models');
 const { validationProfile } = require('../middlewares/profile.validation');
 const { validationPass } = require('../middlewares/password.validation');
-const { error } = require('console');
 
 const router = express.Router();
 
@@ -38,6 +37,7 @@ const upload = multer({
   storage: storage,
   fileFilter: multerFilter 
 });
+
 router.use(upload.single('photo'));
 
 router.get('/profile/user-profile', validationProfile, async (req, res) => {
@@ -51,7 +51,7 @@ router.get('/profile/user-profile', validationProfile, async (req, res) => {
     return res.status(200).json({
       nama: profile.nama,
       email: profile.email,
-      photo: profile.photo,
+      imagePath: profile.imagePath, 
     });
   } catch (error) {
     return res.status(500).json({ msg: 'Terjadi kesalahan dalam mengambil data profil' });
@@ -76,8 +76,6 @@ router.put('/profile/edit-profile', validationProfile, async (req, res) => {
       await userModel.update({ nama }, { where: { id: userId.id } })
       checkPerubahan = true;
     }
-    
-    // Mengedit email 
     if (email) {
       const existingUser = await userModel.findOne({ where: { email } });
       if (existingUser && existingUser.id !== userId.id) {
@@ -139,3 +137,4 @@ router.put('/profile/edit-pass', validationPass , async (req,res) => {
 })
 
 module.exports = router;
+
