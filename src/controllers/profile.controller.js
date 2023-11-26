@@ -1,27 +1,44 @@
 const express = require('express');
 const passport = require('passport');
 const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+const bcrypt = require('bcrypt');
 
 const { validationResult } = require('express-validator');
 const { userModel } = require('../models');
 const { validationProfile } = require('../middlewares/profile.validation');
+const { validationPass } = require('../middlewares/password.validation');
+const { error } = require('console');
 
 const router = express.Router();
-
 
 router.use(passport.authenticate('jwt', {session: false}));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-      cb(null, '../user_img/'); // Menyimpan file di folder 'uploads/'
+    const destinationPath = path.resolve(__dirname, '..', 'user_img');
+    cb(null, destinationPath);
   },
   filename: (req, file, cb) => {
-      cb(null, Date.now() + '-' + file.originalname); // Nama file diubah agar unik
+    cb(null, "user" + req.user.id + '-profile' + path.extname(file.originalname)); 
   }
 });
 
-const upload = multer({ storage: storage });
-router.use(upload.single('images'));
+const multerFilter = (req, file, cb) => {
+   
+  if (!file.originalname.match(/\.(png|jpg)$/)) { 
+     return cb(new Error('Foto hanya bisa png atau jpg'))
+   }
+ cb(null, true)
+
+};
+
+const upload = multer({ 
+  storage: storage,
+  fileFilter: multerFilter 
+});
+router.use(upload.single('photo'));
 
 router.get('/profile/user-profile', validationProfile, async (req, res) => {
   const userId = req.user;
@@ -43,45 +60,82 @@ router.get('/profile/user-profile', validationProfile, async (req, res) => {
 
 router.put('/profile/edit-profile', validationProfile, async (req, res) => {
   const userId = req.user;
-  const { nama, email, photo } = req.body;
+  const { nama, email} = req.body;
+  let checkPerubahan = false;
   const imagePath = req.file ? `../user_img/${req.file.filename}` : null;
-
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.mapped() });
   }
 
   try {
-    const profile = await userModel.findOne({ where: { id: userId.id} });
-
+    const profile = await userModel.findOne({ where: { id: userId.id } });
+    
     // Mengedit nama
     if (nama) {
-      await userModel.update({ nama }, { where: { id: userId.id } });
-      return res.json({msg: 'Username berhasil diubah'});
+      await userModel.update({ nama }, { where: { id: userId.id } })
+      checkPerubahan = true;
     }
     
     // Mengedit email 
     if (email) {
       const existingUser = await userModel.findOne({ where: { email } });
       if (existingUser && existingUser.id !== userId.id) {
-        return res.status(400).json({ msg: 'Email sudah digunakan' });
+        return res.status(400)
       }
       await userModel.update({ email }, { where: { id: userId.id } });
-      const updatedUser = await userModel.findOne({ where: { id: userId.id } });
+      checkPerubahan = true;
     }
     
     // Mengedit profile picture
     if (imagePath) {
       await userModel.update({ photo: imagePath }, { where: { id: userId.id} });
-      return res.send('Foto profil berhasil diubah');
+      checkPerubahan = true;
+    }
+
+    const oldPath = path.join(__dirname, '..', 'user_img', profile.photo);
+
+    if (fs.existsSync(oldPath) && profile.userId === userId.id) {
+      fs.unlink(oldPath, (err) => {
+         
+      });
     }
     
-    return res.status(200).json({ msg: 'Tidak ada perubahan yang dilakukan pada profil' });
-  
+    if(checkPerubahan){
+      return res.status(200).json({msg: "Profil berhasil diubah" });
+    }
+    else{
+      return res.json({msg: ""});
+    }
   } catch (error) {
     console.error(error);
     return res.status(500).json({ msg: 'Terjadi kesalahan dalam mengubah profil' });
   }
 });
+
+router.put('/profile/edit-pass', validationPass , async (req,res) => {
+  const {oldPassword, newPassword, confirmPassword} = req.body;
+  const user = req.user;
+  const salt = bcrypt.genSaltSync(10);
+  
+  const errors = validationResult(req);
+
+  const userPass = await userModel.findOne({where: {id: user.id}})
+  const isPasswordValid = bcrypt.compareSync(oldPassword, userPass.password); 
+  
+  if(!isPasswordValid){
+    return res.status(400).json({msg: "Kata sandi tidak sesuai"});
+  }
+  
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.mapped() });
+  }
+
+  const hashPassword = bcrypt.hashSync(newPassword, salt);
+  await userModel.update({ password: hashPassword }, { where: { id: user.id} });
+
+  return res.json({msg: "Kata sandi berhasil diubah"});
+  
+})
 
 module.exports = router;

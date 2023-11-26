@@ -4,4 +4,6 @@ const router = express.Router();
 
 router.get("/profile/user-profile", profileController );
 router.put("/profile/edit-profile", profileController );
+router.put('/profile/edit-pass', profileController );
+
 module.exports = router;

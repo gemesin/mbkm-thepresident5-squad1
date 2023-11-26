@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nama\": \"bayu\",\r\n    \"email\": \"majumundur@gmail.com\",\r\n    \"password\": \"qwertyuiop!1\",\r\n    \"konfirmasiPassword\": \"qwertyuiop!1\"\r\n}",
+							"raw": "{\r\n    \"nama\": \"\",\r\n    \"email\": \"bingmail.com\",\r\n    \"password\": \"a\",\r\n    \"konfirmasiPassword\": \"!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -24,17 +24,152 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/register",
+							"raw": "http://195.35.32.179:8001/register",
+							"protocol": "http",
 							"host": [
-								"localhost"
+								"195",
+								"35",
+								"32",
+								"179"
 							],
-							"port": "3000",
+							"port": "8001",
 							"path": [
 								"register"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Respon sukses",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nama\": \"komang\",\r\n    \"email\": \"komang13@gmail.com\",\r\n    \"password\": \"abcde45!\",\r\n    \"konfirmasiPassword\": \"abcde45!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://195.35.32.179:8001/register",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "90"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"5a-KFv3iA5hSLzhIu5u7JHFGxUlyjA\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Nov 2023 16:05:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Berhasil registrasi\",\n    \"data\": {\n        \"id\": 7,\n        \"nama\": \"komang\",\n        \"email\": \"komang13@gmail.com\"\n    }\n}"
+						},
+						{
+							"name": "Tambah register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"nama\": \"\",\r\n    \"email\": \"bintang13@gmail.com\",\r\n    \"password\": \"abcd!\",\r\n    \"konfirmasiPassword\": \"abcde4!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://195.35.32.179:8001/register",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "452"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1c4-pHXJqZ+0nAcZG8F69+HKedXQxQY\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Nov 2023 16:06:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"error\": {\n        \"nama\": {\n            \"type\": \"field\",\n            \"value\": \"\",\n            \"msg\": \"wajib diisi\",\n            \"path\": \"nama\",\n            \"location\": \"body\"\n        },\n        \"email\": {\n            \"type\": \"field\",\n            \"value\": \"bintang13@gmail.com\",\n            \"msg\": \"Email sudah digunakan\",\n            \"path\": \"email\",\n            \"location\": \"body\"\n        },\n        \"password\": {\n            \"type\": \"field\",\n            \"value\": \"abcd!\",\n            \"msg\": \"minimal 8 karakter\",\n            \"path\": \"password\",\n            \"location\": \"body\"\n        },\n        \"konfirmasiPassword\": {\n            \"type\": \"field\",\n            \"value\": \"abcde4!\",\n            \"msg\": \"Pasword tidak sama\",\n            \"path\": \"konfirmasiPassword\",\n            \"location\": \"body\"\n        }\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -48,7 +183,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"123123\",\r\n    \"password\": \"dsafsdaf\"\r\n}",
+							"raw": "{\r\n    \"email\": \"hilmi123@gmail.com\",\r\n    \"password\": \"abcde45!\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -56,37 +191,1502 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/login",
+							"raw": "localhost:8001/login",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "8001",
 							"path": [
 								"login"
 							]
 						}
 					},
-					"response": []
-				},
+					"response": [
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"hilm@gmail.com\",\r\n    \"password\": \"abc45!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://195.35.32.179:8001/login",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-EfmmVqVRYIV6L6Irp+LmxLl+iHU\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Nov 2023 16:06:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Email atau password invalid\"\n}"
+						},
+						{
+							"name": "Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"email\": \"hilmi123@gmail.com\",\r\n    \"password\": \"abcde45!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://195.35.32.179:8001/login",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "150"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"96-NxmSEGcboz8IJOJhlkTbyCJlNQE\""
+								},
+								{
+									"key": "Date",
+									"value": "Thu, 09 Nov 2023 16:06:52 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Berhasil login\",\n    \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjk5NTQ2MDEyfQ.9jH23QfISPfdQx9v95UY2MP_ZAqMNx7KPsSa8GM1wiw\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Artikel",
+			"item": [
 				{
-					"name": "New Request",
+					"name": "List Artikel",
 					"request": {
-						"method": "POST",
-						"header": [],
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "image/jpeg",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "localhost:3000/login",
+							"raw": "localhost:8001/artikel",
 							"host": [
 								"localhost"
 							],
-							"port": "3000",
+							"port": "8001",
 							"path": [
-								"login"
+								"artikel"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List Artikel",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "image/jpeg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "localhost:8001/artikel",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"artikel"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "330"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"14a-6aqkxEluo6sJZkMj+YvCcjAYEjw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Nov 2023 17:05:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Berhasil mendapatkan semua list artikel\",\n    \"data\": [\n        {\n            \"id\": 1,\n            \"cover\": \"/covers/artikel1.jpg\",\n            \"judul\": \"pupuk kascing\",\n            \"createdAt\": \"2023-11-09T20:18:22.000Z\",\n            \"deskripsi\": \"testing\",\n            \"isi\": \"\",\n            \"nama_pembuat\": \"\"\n        },\n        {\n            \"id\": 2,\n            \"cover\": \"\",\n            \"judul\": \"padi\",\n            \"createdAt\": \"2023-11-09T23:51:39.000Z\",\n            \"deskripsi\": \"padi\",\n            \"isi\": \"\",\n            \"nama_pembuat\": \"\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "List artikel by id",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJoaWxtaTEyM0BnbWFpbC5jb20iLCJpYXQiOjE2OTk4MDg2Mzh9.QtSZB_S6Z2hJZ1OPt0V5-8pqGbGX48DlntJq4KyfPa4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8001/artikel/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"artikel",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "List artikel by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8001/artikel/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"artikel",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "202"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"ca-c9+p5YgodtPjOspis4hkjs2ZyUc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Nov 2023 17:12:21 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Berhasil mendapatkan artikel id 1\",\n    \"data\": {\n        \"id\": 1,\n        \"cover\": \"/covers/artikel1.jpg\",\n        \"judul\": \"pupuk kascing\",\n        \"createdAt\": \"2023-11-09T20:18:22.000Z\",\n        \"deskripsi\": \"testing\",\n        \"isi\": \"\",\n        \"nama_pembuat\": \"\"\n    }\n}"
+						},
+						{
+							"name": "List artikel by id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8001/artikel/:id",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"artikel",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "4"
+										}
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "27"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1b-mdoIuJD0jgulQlt9tvTby8F+7jY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Nov 2023 17:14:35 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Artikel tidak ada\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Bookmark",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJoaWxtaTEyM0BnbWFpbC5jb20iLCJpYXQiOjE2OTk4MDcyODV9.WHADApnUI5N3RC5MivcyeVSWoQWVztjHQa33eW-Guxs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_artikel\": \"4\",\r\n    \"judul\": \"coba-coba wuhuu\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/artikel/bookmark",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"artikel",
+								"bookmark"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Bookmark",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"id_artikel\": \"4\",\r\n    \"judul\": \"coba-coba wuhuu\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8001/artikel/bookmark",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"artikel",
+										"bookmark"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "97"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"61-q3psunrWvodAGVvKU+hWG4o3UHY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 12 Nov 2023 17:04:11 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Artikel disimpan\",\n    \"data\": {\n        \"no\": 6,\n        \"id_artikel\": \"4\",\n        \"judul\": \"coba-coba wuhuu\",\n        \"id_user\": 4\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Weather",
+			"item": [
+				{
+					"name": "Current",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://195.35.32.179:8001/weather/current?longitude=110.3608&latitude=-7.7828",
+							"protocol": "http",
+							"host": [
+								"195",
+								"35",
+								"32",
+								"179"
+							],
+							"port": "8001",
+							"path": [
+								"weather",
+								"current"
+							],
+							"query": [
+								{
+									"key": "longitude",
+									"value": "110.3608"
+								},
+								{
+									"key": "latitude",
+									"value": "-7.7828"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Current",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://195.35.32.179:8001/weather/current?longitude=110.3608&latitude=-7.7828",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"weather",
+										"current"
+									],
+									"query": [
+										{
+											"key": "longitude",
+											"value": "110.3608"
+										},
+										{
+											"key": "latitude",
+											"value": "-7.7828"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "192"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"c0-2PeUAYSn+VBIjIxpc3l9uaCrRm0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Nov 2023 14:00:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"currentWeather\": {\n        \"temperature\": 25.12,\n        \"main\": \"Clouds\",\n        \"humidity\": 87,\n        \"wind speed\": 1.58,\n        \"description\": \"awan pecah\",\n        \"location\": \"Daerah Istimewa Yogyakarta\",\n        \"icon\": \"04n\",\n        \"path\": \"/icons/04n.svg\"\n    }\n}"
+						},
+						{
+							"name": "Current",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://195.35.32.179:8001/weather/current?longitude=110.3608&latitude=",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"weather",
+										"current"
+									],
+									"query": [
+										{
+											"key": "longitude",
+											"value": "110.3608"
+										},
+										{
+											"key": "latitude",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-IGUzSea6OQx8I+Z4ncZ/8ruFwsY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Nov 2023 14:10:23 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Terjadi kesalahan dalam mengambil data cuaca terkini.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Weekly",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://195.35.32.179:8001/weather/weekly?longitude=106.8451&latitude=-6.2146",
+							"protocol": "http",
+							"host": [
+								"195",
+								"35",
+								"32",
+								"179"
+							],
+							"port": "8001",
+							"path": [
+								"weather",
+								"weekly"
+							],
+							"query": [
+								{
+									"key": "longitude",
+									"value": "106.8451"
+								},
+								{
+									"key": "latitude",
+									"value": "-6.2146"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Weekly",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://195.35.32.179:8001/weather/weekly?longitude=106.8451&latitude=-6.2146",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"weather",
+										"weekly"
+									],
+									"query": [
+										{
+											"key": "longitude",
+											"value": "106.8451"
+										},
+										{
+											"key": "latitude",
+											"value": "-6.2146"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "5656"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"1618-Q58UbjKx19vHYCMxqAeRIpmVpBo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Nov 2023 14:04:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"date\": \"2023-11-18T15:00:00.000Z\",\n        \"temperature\": 24.13,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-18T18:00:00.000Z\",\n        \"temperature\": 25.7,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-18T21:00:00.000Z\",\n        \"temperature\": 26.93,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T00:00:00.000Z\",\n        \"temperature\": 28.9,\n        \"main\": \"Clouds\",\n        \"description\": \"sedikit berawan\",\n        \"icon\": \"02d\",\n        \"path\": \"/icons/02d.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T03:00:00.000Z\",\n        \"temperature\": 32.29,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T06:00:00.000Z\",\n        \"temperature\": 33.07,\n        \"main\": \"Clouds\",\n        \"description\": \"sedikit berawan\",\n        \"icon\": \"02d\",\n        \"path\": \"/icons/02d.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T09:00:00.000Z\",\n        \"temperature\": 31.97,\n        \"main\": \"Clouds\",\n        \"description\": \"awan tersebar\",\n        \"icon\": \"03d\",\n        \"path\": \"/icons/03d.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T12:00:00.000Z\",\n        \"temperature\": 30.29,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T15:00:00.000Z\",\n        \"temperature\": 29.12,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T18:00:00.000Z\",\n        \"temperature\": 28.34,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-19T21:00:00.000Z\",\n        \"temperature\": 28.14,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T00:00:00.000Z\",\n        \"temperature\": 28.81,\n        \"main\": \"Clouds\",\n        \"description\": \"awan pecah\",\n        \"icon\": \"04d\",\n        \"path\": \"/icons/04d.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T03:00:00.000Z\",\n        \"temperature\": 32.15,\n        \"main\": \"Clouds\",\n        \"description\": \"awan mendung\",\n        \"icon\": \"04d\",\n        \"path\": \"/icons/04d.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T06:00:00.000Z\",\n        \"temperature\": 33.84,\n        \"main\": \"Clouds\",\n        \"description\": \"awan pecah\",\n        \"icon\": \"04d\",\n        \"path\": \"/icons/04d.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T09:00:00.000Z\",\n        \"temperature\": 32.08,\n        \"main\": \"Clouds\",\n        \"description\": \"awan tersebar\",\n        \"icon\": \"03d\",\n        \"path\": \"/icons/03d.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T12:00:00.000Z\",\n        \"temperature\": 30.48,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T15:00:00.000Z\",\n        \"temperature\": 29.69,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T18:00:00.000Z\",\n        \"temperature\": 29.17,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-20T21:00:00.000Z\",\n        \"temperature\": 28.55,\n        \"main\": \"Clouds\",\n        \"description\": \"awan mendung\",\n        \"icon\": \"04n\",\n        \"path\": \"/icons/04n.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T00:00:00.000Z\",\n        \"temperature\": 29.02,\n        \"main\": \"Clouds\",\n        \"description\": \"awan mendung\",\n        \"icon\": \"04d\",\n        \"path\": \"/icons/04d.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T03:00:00.000Z\",\n        \"temperature\": 32.01,\n        \"main\": \"Clouds\",\n        \"description\": \"awan tersebar\",\n        \"icon\": \"03d\",\n        \"path\": \"/icons/03d.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T06:00:00.000Z\",\n        \"temperature\": 31.17,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T09:00:00.000Z\",\n        \"temperature\": 31.21,\n        \"main\": \"Clouds\",\n        \"description\": \"awan mendung\",\n        \"icon\": \"04d\",\n        \"path\": \"/icons/04d.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T12:00:00.000Z\",\n        \"temperature\": 29.76,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T15:00:00.000Z\",\n        \"temperature\": 28.66,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T18:00:00.000Z\",\n        \"temperature\": 28.21,\n        \"main\": \"Rain\",\n        \"description\": \"hujan sedang\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-21T21:00:00.000Z\",\n        \"temperature\": 27.87,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T00:00:00.000Z\",\n        \"temperature\": 28.33,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T03:00:00.000Z\",\n        \"temperature\": 31.57,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T06:00:00.000Z\",\n        \"temperature\": 32.22,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T09:00:00.000Z\",\n        \"temperature\": 31.32,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T12:00:00.000Z\",\n        \"temperature\": 29.65,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T15:00:00.000Z\",\n        \"temperature\": 29.38,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T18:00:00.000Z\",\n        \"temperature\": 28.69,\n        \"main\": \"Clouds\",\n        \"description\": \"awan mendung\",\n        \"icon\": \"04n\",\n        \"path\": \"/icons/04n.svg\"\n    },\n    {\n        \"date\": \"2023-11-22T21:00:00.000Z\",\n        \"temperature\": 28.07,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    },\n    {\n        \"date\": \"2023-11-23T00:00:00.000Z\",\n        \"temperature\": 28.2,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-23T03:00:00.000Z\",\n        \"temperature\": 30.94,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-23T06:00:00.000Z\",\n        \"temperature\": 31.98,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-23T09:00:00.000Z\",\n        \"temperature\": 31.42,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10d\",\n        \"path\": \"/icons/10d.svg\"\n    },\n    {\n        \"date\": \"2023-11-23T12:00:00.000Z\",\n        \"temperature\": 30.16,\n        \"main\": \"Rain\",\n        \"description\": \"hujan rintik-rintik\",\n        \"icon\": \"10n\",\n        \"path\": \"/icons/10n.svg\"\n    }\n]"
+						},
+						{
+							"name": "Weekly",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "http://195.35.32.179:8001/weather/weekly?longitude=106.8451&latitude=",
+									"protocol": "http",
+									"host": [
+										"195",
+										"35",
+										"32",
+										"179"
+									],
+									"port": "8001",
+									"path": [
+										"weather",
+										"weekly"
+									],
+									"query": [
+										{
+											"key": "longitude",
+											"value": "106.8451"
+										},
+										{
+											"key": "latitude",
+											"value": ""
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "63"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3f-IGUzSea6OQx8I+Z4ncZ/8ruFwsY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 18 Nov 2023 14:10:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Terjadi kesalahan dalam mengambil data cuaca terkini.\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Forum",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJoaWxtaTEyM0BnbWFpbC5jb20iLCJpYXQiOjE3MDA3Mjg2NjJ9.VRmHGV2DIAxKXff-cDBZUc6QWP0XmsUQPbn7oMvE070",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"judul\": \"\",\r\n    \"isi\": \"\",\r\n    \"topik\": \"dating\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/forum/posts",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"forum",
+								"posts"
 							]
 						}
 					},
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "Profile",
+			"item": [
+				{
+					"name": "Get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSDSFDwiZW1haWwiOiJiYXl1dTEyM0BnbWFpbC5jb20iLCJpYXQiOjE3MDA4OTEwMTZ9.024T0TLM-hj-K1X20psAzyh9G-gnYqa5vEYJEjvY0-Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8001/profile/user-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"profile",
+								"user-profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "localhost:8001/profile/user-profile",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"user-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"51-oa8vVGFp9SaYuT0haLIu4j80LNY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:14:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"nama\": \"b\",\n    \"email\": \"bayuu123@gmail.com\",\n    \"photo\": \"../user_img/user5-profile.png\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJiYXl1MTIzQGdtYWlsLmNvbSIsImlhdCI6MTcwMDgyNjI4M30.q2W8u5b_Bnt3hsr1LtA566n-8Rz38lgdISzKsihkzRk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nama",
+									"value": "johan slebew",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "johan123@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "photo",
+									"type": "file",
+									"src": "/D:/images.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:8001/profile/edit-profile",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"profile",
+								"edit-profile"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nama",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-profile",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "11"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"b-NHuHrbfi9qjxmhHOZdZefzA1yWk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:16:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \" \"\n}"
+						},
+						{
+							"name": "Edit profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nama",
+											"value": "joha",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "johan",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-profile",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-profile"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "218"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"da-b5u7mfiQDM9bmeCPP9YE+dDqYzY\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:17:20 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": {\n        \"nama\": {\n            \"type\": \"field\",\n            \"value\": \"joha\",\n            \"msg\": \"Nama minimal 6 kata\",\n            \"path\": \"nama\",\n            \"location\": \"body\"\n        },\n        \"email\": {\n            \"type\": \"field\",\n            \"value\": \"johan\",\n            \"msg\": \"Format email harus benar\",\n            \"path\": \"email\",\n            \"location\": \"body\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Edit profile",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "nama",
+											"value": "johan slebew",
+											"type": "text"
+										},
+										{
+											"key": "email",
+											"value": "johan123@gmail.com",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/D:/images.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-profile",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-profile"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "32"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"20-mjEMdfsQC90C+xdqLi7VzEzvjBk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:18:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Profil berhasil diubah\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Edit password",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJiYXl1dTEyM0BnbWFpbC5jb20iLCJpYXQiOjE3MDA4OTEwMTZ9.024T0TLM-hj-K1X20psAzyh9G-gnYqa5vEYJEjvY0-Y",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"oldPassword\": \"qwerty123!\",\r\n    \"newPassword\": \"abcde123!\",\r\n    \"confirmPassword\": \"abcde123!\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8001/profile/edit-pass",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"profile",
+								"edit-pass"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Edit password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"asd23!\",\r\n    \"newPassword\": \"qwert\",\r\n    \"confirmPassword\": \"qwer23!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-pass",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-pass"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "33"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"21-rLDjj1kECi4SZOMvj84t39pwkwo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:21:07 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Kata sandi tidak sesuai\"\n}"
+						},
+						{
+							"name": "Edit password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"qwerty123!\",\r\n    \"newPassword\": \"qwer\",\r\n    \"confirmPassword\": \"qwty123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-pass",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-pass"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "291"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"123-wsHa6Q14RvEtrCZxXuE/dJ4v60I\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:22:03 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"errors\": {\n        \"newPassword\": {\n            \"type\": \"field\",\n            \"value\": \"qwer\",\n            \"msg\": \"kata sandi baru harus minimal 8 karakter\",\n            \"path\": \"newPassword\",\n            \"location\": \"body\"\n        },\n        \"confirmPassword\": {\n            \"type\": \"field\",\n            \"value\": \"qwty123!\",\n            \"msg\": \"Konfirmasi kata sandi baru tidak sesuai\",\n            \"path\": \"confirmPassword\",\n            \"location\": \"body\"\n        }\n    }\n}"
+						},
+						{
+							"name": "Edit password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"oldPassword\": \"qwerty123!\",\r\n    \"newPassword\": \"abcde123!\",\r\n    \"confirmPassword\": \"abcde123!\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "localhost:8001/profile/edit-pass",
+									"host": [
+										"localhost"
+									],
+									"port": "8001",
+									"path": [
+										"profile",
+										"edit-pass"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "36"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"24-GE7JpsAIlx2KDaK/U4xEnRP7Hqw\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 25 Nov 2023 06:22:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"msg\": \"Kata sandi berhasil diubah\"\n}"
+						}
+					]
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "value",
+				"value": "{{value}}",
+				"type": "string"
+			},
+			{
+				"key": "key",
+				"value": "{{key}}",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "query",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"key": "value",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "key",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "in",
+			"value": "",
+			"type": "default"
 		}
 	]
 }

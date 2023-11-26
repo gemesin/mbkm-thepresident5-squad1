@@ -14,7 +14,7 @@ router.post("/login",  async (req, res) => {
     if (email && password) {
         const dataUser = await userModel.findOne({ where: { email: email } });
         if (!dataUser) {
-            return res.status(401).json({ message: 'Email atau password invalid' });
+            return res.status(401).json({ message: 'Email atau kata sandi invalid' });
         }
 
         const userPassword = dataUser.password;
@@ -30,16 +30,11 @@ router.post("/login",  async (req, res) => {
             });
         
         } else {
-            return res.status(401).json({ msg: 'Email atau password invalid' });
+            return res.status(401).json({ msg: 'Email atau kata sandi invalid' });
         }
     }
     
 });
 
-
-router.post("/lupa-password", async (req,res) => {
-
-    
-})
 
 module.exports = router;
