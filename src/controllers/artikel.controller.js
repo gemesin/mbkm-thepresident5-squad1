@@ -1,9 +1,6 @@
 const express = require('express');
 const {artikelModel, bookmarkModel} = require('../models');
 const router = express.Router();
-const passport = require('../config/passport');
-
-router.use(passport.authenticate('jwt', { session: false }));
 
 router.get("/artikel", async (req,res) => {
 
