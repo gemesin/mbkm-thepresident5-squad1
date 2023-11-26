@@ -40,27 +40,4 @@ router.get("/artikel/:id", async (req,res) => {
         });
 })
 
-// router.post('/artikel/bookmark',  async (req, res) => {
-//     try {
-//         const userId = req.user;
-
-//         const { id_artikel, judul } = req.body;
-
-//         const bookmarkArtikel = await bookmarkModel.create({
-//             id_artikel: id_artikel,
-//             judul: judul,
-//             id_user: userId.id
-//         });
-
-//         return res.status(200).json({
-//             msg: "Artikel disimpan",
-//             data: bookmarkArtikel
-//         });
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({
-//             msg: "Internal Server Error"
-//         });
-//     }
-// });
 module.exports = router;
