@@ -1030,7 +1030,7 @@
 			"name": "Forum",
 			"item": [
 				{
-					"name": "New Request",
+					"name": "Buat",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1045,23 +1045,62 @@
 						"method": "POST",
 						"header": [],
 						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"judul\": \"\",\r\n    \"isi\": \"\",\r\n    \"topik\": \"dating\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "Diskriminasi petani",
+									"type": "text"
+								},
+								{
+									"key": "content",
+									"value": "mengapa pemerintah seperti anarkis bila melihat petani?",
+									"type": "text"
+								},
+								{
+									"key": "cover",
+									"type": "file",
+									"src": "/D:/Studi Independen/gambar/Aksi-Petani-Muda-SPI.jpeg"
 								}
-							}
+							]
 						},
 						"url": {
-							"raw": "localhost:8001/forum/posts",
+							"raw": "localhost:8001/forum/new-post",
 							"host": [
 								"localhost"
 							],
 							"port": "8001",
 							"path": [
 								"forum",
-								"posts"
+								"new-post"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lihat",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJoaWxtaTEyM0BnbWFpbC5jb20iLCJpYXQiOjE3MDA3Mjg2NjJ9.VRmHGV2DIAxKXff-cDBZUc6QWP0XmsUQPbn7oMvE070",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8001/forum",
+							"host": [
+								"localhost"
+							],
+							"port": "8001",
+							"path": [
+								"forum"
 							]
 						}
 					},
@@ -1653,25 +1692,28 @@
 		}
 	],
 	"auth": {
-		"type": "apikey",
-		"apikey": [
-			{
-				"key": "value",
-				"value": "{{value}}",
-				"type": "string"
-			},
-			{
-				"key": "key",
-				"value": "{{key}}",
-				"type": "string"
-			},
-			{
-				"key": "in",
-				"value": "query",
-				"type": "string"
-			}
-		]
+		"type": "inherit"
 	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
 	"variable": [
 		{
 			"key": "value",

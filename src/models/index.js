@@ -25,8 +25,8 @@ db.sequelize = sequelize;
 
 db.userModel = require("./user.model")(sequelize, Sequelize);
 db.artikelModel = require('./artikel.model')(sequelize, Sequelize);
-db.bookmarkModel = require('./bookmark.model')(sequelize, Sequelize);
 db.weatherModel = require('./weather.model')(sequelize, Sequelize);
+db.forumModel = require('./forum.model')(sequelize, Sequelize);
 
 //relasi
 // User.belongsToMany(Artikel, { through: Bookmark, foreignKey: 'id_user' });
