@@ -6,16 +6,8 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             allowNull: false,
         },
-        cover: {
-            type: Sequelize.STRING
-        },
-        judul: {
+        title: {
             type: Sequelize.STRING,
-        },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal('NOW()'),
         },
         deskripsi: {
             type: Sequelize.TEXT,
@@ -23,8 +15,16 @@ module.exports = (sequelize, Sequelize) => {
         isi: {
             type: Sequelize.TEXT,
         },
-        nama_pembuat: {
+        pembuat: {
             type: Sequelize.STRING,
+        },
+        cover: {
+            type: Sequelize.STRING
+        },
+        createdAt: {
+            type: Sequelize.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal('NOW()'),
         },
     });
 
