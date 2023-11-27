@@ -20,7 +20,7 @@ router.get("/artikel", async (req,res) => {
 
 router.get("/artikel/:id", async (req,res) => {
     const id = req.params.id;
-    console.log(id)
+
     const listArtikelById = await artikelModel.findOne({
         where: {id : id}
     });

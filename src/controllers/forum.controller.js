@@ -1,5 +1,5 @@
 const express = require('express');
-const {forumModel} = require('../models/');
+const {forumModel, commentModel, userModel, likesModel} = require('../models/');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -36,7 +36,13 @@ router.use(upload.single('cover'));
 
 router.get('/forum', async (req,res) => {
 
-    const getAllPost = await forumModel.findAll();
+    const getAllPost = await forumModel.findAll({
+      include: [{
+        model: likesModel,
+        as: 'likes',
+        attributes: ['id_user'],
+      }]
+    });
     
     if(getAllPost.length === 0){
         return res.status(404).json({
@@ -71,4 +77,116 @@ router.post('/forum/new-post', async (req,res) => {
         data: newPost
     })
 })
+
+router.get('/forum/:id', async (req,res) => {
+  const postId = req.params.id;
+
+  const getPostById = await forumModel.findOne({
+    where: {id : postId},
+    include: [{
+      model: commentModel,
+      as: 'comment',
+      include: [{
+        model: userModel,
+        as: 'user',
+        attributes: ['nama', 'photo']
+      }]
+    }],
+
+  });
+
+  if (!getPostById){
+    return res.status(404).json({msg: 'Gagal mendapatkan postingan'});
+  }
+  return res.json({
+    msg: "Berhasil mendapatkan postingan",
+    data: getPostById
+  })
+
+})
+
+router.post("/forum/:id/comment/", async (req, res) => {
+  const { text } = req.body;
+  const postId = req.params.id;
+  
+  try {
+    const newComment = await commentModel.create({
+      id_post: postId,
+      id_user: req.user.id,
+      text: text,
+    });
+
+    if (!newComment) {
+      return res.status(400).json({ msg: "Komentar gagal ditambahkan" });
+    }
+
+    return res.status(201).json({
+      msg: "Komentar berhasil ditambahkan",
+      data: newComment
+    });
+
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: "Terjadi kesalahan dalam menambahkan komentar" });
+  }
+});
+
+router.put('/forum/:id/unlike', async (req, res) => {
+  const postId = req.params.id;
+  
+  const checkPost = await forumModel.findOne({
+    where: {id: postId}
+  })
+
+  if(!checkPost){
+    return res.status(404).json({msg: "Postingan tidak ditemukan"})
+  }
+
+  const postUnlike = await likesModel.destroy({
+    where: {
+      id_post: postId,
+      id_user: req.user.id,
+    },
+  });
+
+  if (!postUnlike) {
+    return res.status(400).json({ msg: "Gagal unlike" });
+  }
+
+  return res.json({
+    msg: "Unlike berhasil"
+  });
+});
+
+
+router.put('/forum/:id/like', async (req,res) => {
+  const postId = req.params.id;
+  
+  const checkPost = await forumModel.findOne({
+    where: {id: postId}
+  })
+
+  if(!checkPost){
+    return res.status(404).json({msg: "Postingan tidak ditemukan"})
+  }
+
+  const [like, created] = await likesModel.findOrCreate({
+    where: {
+      id_post: postId,
+      id_user: req.user.id
+    }
+  })
+
+  if (!created){
+    return res.status(400).json({msg: "Anda sudah menyukai postingan ini"});
+  }
+
+  return res.json({
+    msg: "Postingan disukai",
+    data: like
+  })
+
+})
+
+
 module.exports = router;
