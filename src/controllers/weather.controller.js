@@ -12,6 +12,7 @@ async function getCurrentWeatherController(req, res) {
     const currentWeatherData = await response.json();
 
     const currentWeather = {
+      date: new Date(currentWeatherData.dt * 1000),
       temperature: currentWeatherData.main.temp,
       main: currentWeatherData.weather[0].main,
       humidity: currentWeatherData.main.humidity,

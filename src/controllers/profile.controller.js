@@ -24,19 +24,10 @@ const storage = multer.diskStorage({
   }
 });
 
-const multerFilter = (req, file, cb) => {
-   
-  if (!file.originalname.match(/\.(png|jpg)$/)) { 
-     return cb(new Error('Foto hanya bisa png atau jpg'))
-   }
- cb(null, true)
-
-};
-
 const upload = multer({ 
   storage: storage,
-  fileFilter: multerFilter 
 });
+
 router.use(upload.single('photo'));
 
 router.get('/profile/user-profile', validationProfile, async (req, res) => {
@@ -59,7 +50,7 @@ router.get('/profile/user-profile', validationProfile, async (req, res) => {
 
 router.put('/profile/edit-profile', validationProfile, async (req, res) => {
   const userId = req.user;
-  const { nama, email} = req.body;
+  const { nama } = req.body;
   let checkPerubahan = false;
   const imagePath = req.file ? `../user_img/${req.file.filename}` : null;
   const errors = validationResult(req);
@@ -73,16 +64,6 @@ router.put('/profile/edit-profile', validationProfile, async (req, res) => {
     // Mengedit nama
     if (nama) {
       await userModel.update({ nama }, { where: { id: userId.id } })
-      checkPerubahan = true;
-    }
-    
-    // Mengedit email 
-    if (email) {
-      const existingUser = await userModel.findOne({ where: { email } });
-      if (existingUser && existingUser.id !== userId.id) {
-        return res.status(400)
-      }
-      await userModel.update({ email }, { where: { id: userId.id } });
       checkPerubahan = true;
     }
     

@@ -1,25 +1,18 @@
-const { body } = require('express-validator');
+const { check } = require('express-validator');
 const { userModel } = require('../models');
 
 const validationProfile = [
-  body('nama')
+  check('nama')
     .trim()
     .optional({ nullable: true, checkFalsy: true })
     .isLength({min: 6}).withMessage('Nama minimal 6 kata'),
-  body('email')
-    .isEmail().withMessage('Format email harus benar')
-    .custom(async (email, { req }) => {
-      const existingUser = await userModel.findOne({
-          where: {
-              email: email
-          }
-      });
-      if (existingUser) {
-          throw new Error("Email sudah digunakan");
+  check('photo')
+    .custom((value, {req}) => {
+      if (!req.file.originalname.match(/\.(png|jpg)$/)) {
+        throw new Error('Foto hanya bisa png atau jpg');
       }
+      return true;
     })
-    .bail() 
-    .optional({ nullable: true, checkFalsy: true })
 ];
 
 module.exports = { validationProfile };
