@@ -16,8 +16,13 @@ const sequelize = new Sequelize(
             timestamps: false,
             freezeTableName: true
         },
-        logging: true
+        logging: true,
+        dialecOptions: {
+            useUTC: false,
+        },
+        timezone: '+07:00'
     }
+    
 );
 
 const db = {};

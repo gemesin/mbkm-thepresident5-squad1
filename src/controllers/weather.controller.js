@@ -44,25 +44,37 @@ async function getWeeklyWeatherController(req, res) {
     const response = await fetch(weeklyWeatherEndpoint);
     const weeklyWeatherData = await response.json();
 
-    const weeklyWeather = weeklyWeatherData.list.map((item) => ({
-      date: new Date(item.dt * 1000),
-      temperature: item.main.temp,
-      main: item.weather[0].main,
-      description: item.weather[0].description,
-      icon: item.weather[0].icon,
-    }));
+    const dailyWeather = {};
+    weeklyWeatherData.list.forEach((item) => {
+      const date = new Date(item.dt_txt);
+      const eachDay = date.toISOString().split('T')[0]; 
+      console.log(eachDay)
+      if (!dailyWeather[eachDay]) {
+        dailyWeather[eachDay] = {
+          date,
+          temperature: item.main.temp,
+          main: item.weather[0].main,
+          description: item.weather[0].description,
+          icon: item.weather[0].icon,
+        };
+      }
+    });
 
-    for (const weatherItem of weeklyWeather) {
+    const dailyWeatherArray = Object.values(dailyWeather);
+
+    for (const weatherItem of dailyWeatherArray) {
       const weatherIcon = await weatherModel.findOne({
-        where: { icon: weatherItem.icon }
+        where: { icon: weatherItem.icon },
       });
       weatherItem.path = weatherIcon.path;
     }
-    
-    res.json(weeklyWeather);
+
+    res.json(dailyWeatherArray);
   } catch (error) {
     console.error(error);
-    res.status(500).json({msg: 'Terjadi kesalahan dalam mengambil data cuaca terkini.'});
+    res.status(500).json({
+      msg: 'Terjadi kesalahan dalam mengambil data cuaca terkini.',
+    });
   }
 }
 
