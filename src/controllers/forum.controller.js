@@ -7,6 +7,8 @@ const passport = require('passport');
 const { forumValidation } = require('../middlewares/forum.validation');
 const { commentValidation } = require('../middlewares/comment.validation');
 const { validationResult } = require('express-validator');
+const { Op } = require('sequelize');
+
 const router = express.Router();
 
 router.use(passport.authenticate('jwt', {session: false}));
@@ -58,22 +60,26 @@ router.get('/forum', async (req,res) => {
     })
 })
 
-router.post('/forum/new-post', forumValidation(), async (req,res) => {
-    const errors = validationResult(req);
-    const {title, content} = req.body;
-    const userId = req.user;
-    const coverPath = req.file ? `../covers_forum/${req.file.filename}` : null;
+router.post('/forum/new-post', forumValidation, async (req,res) => {
+  const {title, content} = req.body;
+  const userId = req.user;
+  const coverPath = req.file ? `../covers_forum/${req.file.filename}` : null;
 
-    const newPost = await forumModel.create({
-        title: title,
-        id_user: userId.id,
-        content: content,
-        cover: coverPath
-    })
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+   }
 
-    if(!newPost){
-        return res.status(400).json({msg: "Postingan gagal dibuat"})
-    }
+  const newPost = await forumModel.create({
+    title: title,
+    id_user: userId.id,
+    content: content,
+    cover: coverPath
+  })
+
+  if(!newPost){
+    return res.status(400).json({msg: "Postingan gagal dibuat"})
+  }
 
     return res.status(201).json({
         msg: "Postingan berhasil dibuat",
@@ -108,11 +114,15 @@ router.get('/forum/:id', async (req,res) => {
 
 })
 
-router.post("/forum/:id/comment/", commentValidation(), async (req, res) => {
-  const errors = validationResult(req);
+router.post("/forum/:id/comment/", commentValidation, async (req, res) => {
   const { text } = req.body;
   const postId = req.params.id;
   
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+   return res.status(400).json({ errors: errors.array() });
+  }
+
   try {
     const newComment = await commentModel.create({
       id_post: postId,
@@ -192,5 +202,39 @@ router.put('/forum/:id/like', async (req,res) => {
 
 })
 
+router.get('/forum/post/find', async (req,res) => {
+  const {search} = req.query;
+
+  if (!search) {
+    return res.status(400).json({ msg: 'Silahkan masukkan kata kunci' });
+  }
+
+  const result = await forumModel.findAll({
+    where: {
+      [Op.or]: [
+        {
+          title: {
+            [Op.like]: `%${search}%`
+          }
+        },
+        {
+          content: {
+            [Op.like]: `%${search}%`
+          }
+        }
+      ]
+    }
+  });
+
+  if(result.length === 0){
+    return res.status(404).json({msg : 'Postingan tidak ditemukan'})
+  }
+
+  return res.json({
+    msg: 'Postingan ditemukan',
+    data: result
+  })
+
+})
 
 module.exports = router;

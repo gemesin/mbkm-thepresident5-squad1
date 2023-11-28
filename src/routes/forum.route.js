@@ -6,6 +6,7 @@ router.post("/forum/:id/comment/", forumController );
 router.post("/forum/new-post", forumController );
 router.get("/forum", forumController );
 router.get("/forum/:id", forumController );
+router.get('/forum/post/find', forumController)
 router.put('/forum/:id/like', forumController);
 router.put('/forum/:id/unlike', forumController);
 

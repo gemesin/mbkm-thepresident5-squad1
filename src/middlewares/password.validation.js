@@ -1,6 +1,7 @@
 const { body } = require('express-validator');
 const { userModel } = require('../models');
 const bcrypt = require('bcrypt');
+const salt = bcrypt.genSaltSync(10);
 
 const validationPass = [
   body('oldPassword')

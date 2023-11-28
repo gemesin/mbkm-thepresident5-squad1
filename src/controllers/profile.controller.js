@@ -9,6 +9,7 @@ const { validationResult } = require('express-validator');
 const { userModel } = require('../models');
 const { validationProfile } = require('../middlewares/profile.validation');
 const { validationPass } = require('../middlewares/password.validation');
+const { error } = require('console');
 
 const router = express.Router();
 
@@ -93,7 +94,7 @@ router.put('/profile/edit-profile', validationProfile, async (req, res) => {
   }
 });
 
-router.put('/profile/edit-pass', validationPass , async (req,res) => {
+router.put('/profile/edit-pass', validationPass, async (req,res) => {
   const {oldPassword, newPassword, confirmPassword} = req.body;
   const user = req.user;
   const salt = bcrypt.genSaltSync(10);
