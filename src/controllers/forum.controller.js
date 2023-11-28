@@ -4,7 +4,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const passport = require('passport');
-
+const { forumValidation } = require('../middlewares/forum.validation');
+const { commentValidation } = require('../middlewares/comment.validation');
+const { validationResult } = require('express-validator');
 const router = express.Router();
 
 router.use(passport.authenticate('jwt', {session: false}));
@@ -56,7 +58,8 @@ router.get('/forum', async (req,res) => {
     })
 })
 
-router.post('/forum/new-post', async (req,res) => {
+router.post('/forum/new-post', forumValidation(), async (req,res) => {
+    const errors = validationResult(req);
     const {title, content} = req.body;
     const userId = req.user;
     const coverPath = req.file ? `../covers_forum/${req.file.filename}` : null;
@@ -105,7 +108,8 @@ router.get('/forum/:id', async (req,res) => {
 
 })
 
-router.post("/forum/:id/comment/", async (req, res) => {
+router.post("/forum/:id/comment/", commentValidation(), async (req, res) => {
+  const errors = validationResult(req);
   const { text } = req.body;
   const postId = req.params.id;
   

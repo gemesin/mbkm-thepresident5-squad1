@@ -1,0 +1,10 @@
+const { body } = require('express-validator');
+const { commentModel } = require('../models');
+
+const commentValidation = () => {
+  return [
+    body('text').notEmpty().withMessage('Komentar tidak boleh kosong'),
+  ];
+};
+
+module.exports = {commentValidation};
