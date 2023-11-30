@@ -8,6 +8,7 @@ const { forumValidation } = require('../middlewares/forum.validation');
 const { commentValidation } = require('../middlewares/comment.validation');
 const { validationResult } = require('express-validator');
 const { Op } = require('sequelize');
+const lmsModel = require('../models/lms.model');
 
 const router = express.Router();
 
@@ -75,7 +76,7 @@ router.get('/forum', async (req, res) => {
   }
 });
 
-router.post('/forum/new-post', uploadCover,  forumValidation, async (req, res) => {
+router.post('/forum/new-post', uploadCover, forumValidation, async (req, res) => {
   const { title, content } = req.body;
   const userId = req.user;
   const coverPath = req.file ? `../covers_forum/${req.file.filename}` : null;
@@ -86,8 +87,8 @@ router.post('/forum/new-post', uploadCover,  forumValidation, async (req, res) =
   }
 
   const newPost = await forumModel.create({
-    title: title,
     id_user: userId.id,
+    title: title,
     content: content,
     cover: coverPath
   })
@@ -96,9 +97,11 @@ router.post('/forum/new-post', uploadCover,  forumValidation, async (req, res) =
     return res.status(400).json({ msg: "Postingan gagal dibuat" })
   }
 
+
   return res.status(201).json({
     msg: "Postingan berhasil dibuat",
-    data: newPost
+    user: userId.nama,
+    data: newPost,
   })
 })
 

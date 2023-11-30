@@ -5,6 +5,7 @@ const profile = require('./src/routes/profile.route');
 const artikel = require('./src/routes/artikel.route');
 const weather = require('./src/routes/weather.route');
 const forum = require('./src/routes/forum.route');
+const lms = require('./src/routes/lms.route');
 const db = require("./src/models/index");
 const passport = require('passport')
 
@@ -19,6 +20,7 @@ app.use(profile);
 app.use(artikel);
 app.use(weather);
 app.use(forum);
+app.use(lms);
 
 app.use('/uploads',express.static('uploads'));
 app.use(express.static('src'))
