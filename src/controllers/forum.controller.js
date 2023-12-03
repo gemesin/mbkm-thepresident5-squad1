@@ -46,7 +46,6 @@ router.get('/forum', async (req, res) => {
 
     const getAllPost = await forumModel.findAll({
       include: [
-
         {
           model: userModel,
           as: 'created_by',
@@ -60,6 +59,7 @@ router.get('/forum', async (req, res) => {
             id_user: userId
           },
           attributes: ['id_user'],
+          required: false
         }
       ]
     });
