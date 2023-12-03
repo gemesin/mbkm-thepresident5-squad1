@@ -8,7 +8,7 @@ const { forumValidation } = require('../middlewares/forum.validation');
 const { commentValidation } = require('../middlewares/comment.validation');
 const { validationResult } = require('express-validator');
 const { Op } = require('sequelize');
-const lmsModel = require('../models/lms.model');
+const Sequelize = require('sequelize');
 
 const router = express.Router();
 
@@ -46,6 +46,13 @@ router.get('/forum', async (req, res) => {
 
     const getAllPost = await forumModel.findAll({
       include: [
+
+        {
+          model: userModel,
+          as: 'created_by',
+          where: { id: Sequelize.col('forum.id_user') },
+          attributes: ['nama', 'photo']
+        },
         {
           model: likesModel,
           as: 'likes',
@@ -53,7 +60,6 @@ router.get('/forum', async (req, res) => {
             id_user: userId
           },
           attributes: ['id_user'],
-          required: false
         }
       ]
     });
@@ -75,6 +81,7 @@ router.get('/forum', async (req, res) => {
     });
   }
 });
+
 
 router.post('/forum/new-post', uploadCover, forumValidation, async (req, res) => {
   const { title, content } = req.body;
