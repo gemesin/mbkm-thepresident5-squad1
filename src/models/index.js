@@ -45,7 +45,7 @@ db.forumModel.hasMany(db.commentModel, { as: 'comment', foreignKey: 'id_post' })
 db.commentModel.belongsTo(db.userModel, {as: 'user', foreignKey: "id_user"})
 db.forumModel.hasMany(db.likesModel, { as: 'likes', foreignKey: 'id_post' });
 db.likesModel.belongsTo(db.forumModel, { foreignKey: 'id_post' });
-
+db.forumModel.belongsTo(db.userModel, {as: "created_by", foreignKey: 'id'})
 //relasi lms
 db.progresModel.belongsTo(db.lmsModel, {foreignKey: "id_lms"});
 db.lmsModel.hasMany(db.progresModel, {foreignKey: 'id_lms'})

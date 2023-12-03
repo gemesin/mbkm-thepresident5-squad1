@@ -108,29 +108,43 @@ router.post('/forum/new-post', uploadCover, forumValidation, async (req, res) =>
 router.get('/forum/:id', async (req, res) => {
   const postId = req.params.id;
 
-  const getPostById = await forumModel.findOne({
-    where: { id: postId },
-    include: [{
-      model: commentModel,
-      as: 'comment',
-      include: [{
-        model: userModel,
-        as: 'user',
-        attributes: ['nama', 'photo']
-      }]
-    }],
+  try {
+    const getPostById = await forumModel.findOne({
+      where: { id: postId },
+      include: [
+        {
+          model: userModel,
+          as: "created_by",
+          attributes: ['nama', 'photo']
+        },
+        {
+          model: commentModel,
+          as: 'comment',
+          include: [
+            {
+              model: userModel,
+              as: 'user',
+              attributes: ['nama', 'photo']
+            }
+          ]
+        }
+      ]
+    });
 
-  });
+    if (!getPostById) {
+      return res.status(404).json({ msg: 'Postingan tidak ditemukan' });
+    }
 
-  if (!getPostById) {
-    return res.status(404).json({ msg: 'Postingan tidak ditemukan' });
+    return res.json({
+      msg: "Berhasil mendapatkan postingan",
+      data: getPostById
+    });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ msg: 'Internal Server Error' });
   }
-  return res.json({
-    msg: "Berhasil mendapatkan postingan",
-    data: getPostById
-  })
+});
 
-})
 
 router.post("/forum/:id/comment/", commentValidation, async (req, res) => {
   const { text } = req.body;

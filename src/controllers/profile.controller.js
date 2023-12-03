@@ -61,7 +61,7 @@ router.get('/profile/user-profile', validationProfile, async (req, res) => {
 
 router.put('/profile/edit-profile', uploadPhoto, validationProfile, async (req, res) => {
   const userId = req.user;
-  const { nama } = req.body;
+  const nama = req.body.nama;
   let checkPerubahan = false;
   const imagePath = req.file ? `../user_img/${req.file.filename}` : null;
 
