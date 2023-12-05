@@ -25,7 +25,10 @@ app.use(lms);
 app.use('/uploads',express.static('uploads'));
 app.use(express.static('src'))
 
-const PORT = 8001;
+require('dotenv').config();
+
+const PORT = process.env.PORT || 8001;
+const BASE_URL = process.env.BASE_URL || 'http://localhost:8001';
 
 db.sequelize
     .authenticate()
@@ -37,7 +40,7 @@ db.sequelize
 });
 
 app.listen(PORT, () => {
-    console.log(`api started at ${PORT}`);
+    console.log(`api started at ${BASE_URL}`);
 });
 
 app.get('/', (req, res) => {

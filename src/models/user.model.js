@@ -18,7 +18,7 @@ module.exports = (sequelize, Sequelize) => {
         },
         photo: {
             type: Sequelize.STRING,
-            defaultValue: '../user_img/'
+            defaultValue: '/user_img/'
         },
         createdAt: {
             type: Sequelize.DATE,

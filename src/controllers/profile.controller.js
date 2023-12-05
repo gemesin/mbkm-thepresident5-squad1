@@ -11,6 +11,7 @@ const { validationProfile } = require('../middlewares/profile.validation');
 const { validationPass } = require('../middlewares/password.validation');
 
 const router = express.Router();
+const baseURL = process.env.BASE_URL || 'http://localhost:8001';
 
 router.use(passport.authenticate('jwt', { session: false }));
 
@@ -63,7 +64,7 @@ router.put('/profile/edit-profile', uploadPhoto, validationProfile, async (req, 
   const userId = req.user;
   const nama = req.body.nama;
   let checkPerubahan = false;
-  const imagePath = req.file ? `../user_img/${req.file.filename}` : null;
+  const imagePath = req.file ? `${baseURL}/user_img/${req.file.filename}` : null;
 
   const errors = validationResult(req);
   if (!errors.isEmpty() || req.fileValidationError) {

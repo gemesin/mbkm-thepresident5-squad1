@@ -11,12 +11,13 @@ const { Op } = require('sequelize');
 const Sequelize = require('sequelize');
 
 const router = express.Router();
+const baseURL = process.env.BASE_URL || 'http://localhost:8001';
 
 router.use(passport.authenticate('jwt', { session: false }));
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const destinationPath = path.resolve(__dirname, '..', 'covers_forum');
+    const destinationPath = path.resolve(__dirname, '..' , 'covers_forum');
     cb(null, destinationPath);
   },
   filename: (req, file, cb) => {
@@ -86,7 +87,7 @@ router.get('/forum', async (req, res) => {
 router.post('/forum/new-post', uploadCover, forumValidation, async (req, res) => {
   const { title, content } = req.body;
   const userId = req.user;
-  const coverPath = req.file ? `../covers_forum/${req.file.filename}` : null;
+  const coverPath = req.file ? `${baseURL}/covers_forum/${req.file.filename}` : null;
 
   const errors = validationResult(req);
   if (!errors.isEmpty() || req.fileValidationError) {
