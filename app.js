@@ -27,8 +27,8 @@ app.use(express.static('src'))
 
 require('dotenv').config();
 
-const PORT = process.env.PORT || 8001;
-const BASE_URL = process.env.BASE_URL || 'http://localhost:8001';
+const PORT = 8001;
+const baseURL = 'http://localhost:8001';
 
 db.sequelize
     .authenticate()
@@ -40,7 +40,7 @@ db.sequelize
 });
 
 app.listen(PORT, () => {
-    console.log(`api started at ${BASE_URL}`);
+    console.log(`api started at ${baseURL}`);
 });
 
 app.get('/', (req, res) => {

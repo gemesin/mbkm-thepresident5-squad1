@@ -11,7 +11,7 @@ const { validationProfile } = require('../middlewares/profile.validation');
 const { validationPass } = require('../middlewares/password.validation');
 
 const router = express.Router();
-const baseURL = process.env.BASE_URL || 'http://localhost:8001';
+const baseURL = "http://195.35.32.179:8001";
 
 router.use(passport.authenticate('jwt', { session: false }));
 
@@ -24,6 +24,7 @@ const storage = multer.diskStorage({
     cb(null, "user" + req.user.id + '-profile' + path.extname(file.originalname));
   }
 });
+
 
 
 const multerFilter = (req, file, cb) => {
@@ -44,7 +45,6 @@ const uploadPhoto = upload.single('photo');
 
 router.get('/profile/user-profile', validationProfile, async (req, res) => {
   const userId = req.user;
-  console.log(userId.id)
   try {
     const profile = await userModel.findOne({ where: { id: userId.id } });
     if (!profile) {

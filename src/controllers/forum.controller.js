@@ -11,7 +11,7 @@ const { Op } = require('sequelize');
 const Sequelize = require('sequelize');
 
 const router = express.Router();
-const baseURL = process.env.BASE_URL || 'http://localhost:8001';
+const baseURL = 'http://195.35.32.179:8001';
 
 router.use(passport.authenticate('jwt', { session: false }));
 
