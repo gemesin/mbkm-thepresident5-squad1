@@ -25,8 +25,6 @@ const storage = multer.diskStorage({
   }
 });
 
-
-
 const multerFilter = (req, file, cb) => {
   let ext = path.extname(file.originalname);
   if (ext !== '.png' && ext !== '.jpg' && ext !== '.jpeg') {
