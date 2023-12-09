@@ -271,7 +271,12 @@ router.get('/forum/posts/find', async (req, res) => {
           }
         }
       ]
-    }
+    },
+    include: [{
+      model: userModel,
+      as: 'created_by',
+      attributes: ['nama', 'photo', 'createdAt']
+    }]
   });
 
   if (result.length === 0) {
