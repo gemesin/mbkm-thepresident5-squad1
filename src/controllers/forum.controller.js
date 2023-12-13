@@ -59,7 +59,7 @@ router.get('/forum', async (req, res) => {
           where: {
             id_user: userId
           },
-          attributes: ['id_user'],
+          attributes: ['isLike'],
           required: false
         }
       ]
@@ -71,9 +71,17 @@ router.get('/forum', async (req, res) => {
       });
     }
 
+    const modifiedPosts = getAllPost.map(post => {
+      const likes = post.likes.length > 0 ? post.likes[0].isLike : false;
+      return {
+        ...post.toJSON(),
+        likes
+      };
+    });
+    
     return res.json({
       msg: "Postingan ditemukan",
-      data: getAllPost
+      data: modifiedPosts
     });
   } catch (error) {
     console.error(error);
@@ -126,6 +134,15 @@ router.get('/forum/:id', async (req, res) => {
           attributes: ['nama', 'photo']
         },
         {
+          model: likesModel,
+          as: 'likes',
+          where: {
+            id_user: req.user.id
+          },
+          attributes: ['isLike'],
+          required: false
+        },
+        {
           model: commentModel,
           as: 'comment',
           include: [
@@ -143,9 +160,15 @@ router.get('/forum/:id', async (req, res) => {
       return res.status(404).json({ msg: 'Postingan tidak ditemukan' });
     }
 
+    const likes = getPostById.likes.length > 0 ? getPostById.likes[0].isLike : false;
+    const modifiedPost = {
+      ...getPostById.toJSON(),
+      likes
+    };
+
     return res.json({
       msg: "Berhasil mendapatkan postingan",
-      data: getPostById
+      data: modifiedPost
     });
   } catch (error) {
     console.error(error);
@@ -223,6 +246,7 @@ router.put('/forum/:id/unlike', async (req, res) => {
 
 router.put('/forum/:id/like', async (req, res) => {
   const postId = req.params.id;
+const {isLike} = req.body;
 
   const checkPost = await forumModel.findOne({
     where: { id: postId }
@@ -232,10 +256,11 @@ router.put('/forum/:id/like', async (req, res) => {
     return res.status(404).json({ msg: "Postingan tidak ditemukan" })
   }
 
-  const [like, created] = await likesModel.findOrCreate({
+  const {like, created} = await likesModel.findOrCreate({
     where: {
       id_post: postId,
-      id_user: req.user.id
+      id_user: req.user.id,
+      isLike: isLike
     }
   })
 

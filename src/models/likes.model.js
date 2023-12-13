@@ -14,6 +14,9 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             primaryKey: true
         },
+        isLike: {
+            type: Sequelize.BOOLEAN
+        }
     });
 
     return Likes;
