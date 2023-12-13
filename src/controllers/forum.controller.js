@@ -256,7 +256,7 @@ router.put('/forum/:id/like', async (req, res) => {
     return res.status(404).json({ msg: "Postingan tidak ditemukan" })
   }
 
-  const {like, created} = await likesModel.findOrCreate({
+  const [like, created] = await likesModel.findOrCreate({
     where: {
       id_post: postId,
       id_user: req.user.id,
@@ -269,7 +269,8 @@ router.put('/forum/:id/like', async (req, res) => {
   }
 
   return res.json({
-    msg: "Postingan disukai"
+    msg: "Postingan disukai",
+    data: like
   })
 
 })
