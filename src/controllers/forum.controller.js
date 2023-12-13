@@ -246,7 +246,7 @@ router.put('/forum/:id/unlike', async (req, res) => {
 
 router.put('/forum/:id/like', async (req, res) => {
   const postId = req.params.id;
-const {isLike} = req.body;
+  const {isLike} = req.body;
 
   const checkPost = await forumModel.findOne({
     where: { id: postId }
@@ -269,8 +269,7 @@ const {isLike} = req.body;
   }
 
   return res.json({
-    msg: "Postingan disukai",
-    data: like
+    msg: "Postingan disukai"
   })
 
 })
