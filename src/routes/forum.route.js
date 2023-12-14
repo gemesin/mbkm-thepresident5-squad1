@@ -7,7 +7,7 @@ router.post("/forum/new-post", forumController );
 router.get("/forum", forumController );
 router.get("/forum/:id", forumController );
 router.get('/forum/posts/find', forumController)
-router.put('/forum/:id/like', forumController);
+router.post('/forum/:id/like', forumController);
 router.put('/forum/:id/unlike', forumController);
 
 module.exports = router;

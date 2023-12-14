@@ -244,36 +244,44 @@ router.put('/forum/:id/unlike', async (req, res) => {
 });
 
 
-router.put('/forum/:id/like', async (req, res) => {
+router.post('/forum/:id/like', async (req, res) => {
   const postId = req.params.id;
-  const {isLike} = req.body;
+  const { isLike } = req.body;
 
   const checkPost = await forumModel.findOne({
     where: { id: postId }
-  })
+  });
 
   if (!checkPost) {
-    return res.status(404).json({ msg: "Postingan tidak ditemukan" })
+    return res.status(404).json({ msg: "Postingan tidak ditemukan" });
   }
 
-  const [like, created] = await likesModel.findOrCreate({
+  const existingLike = await likesModel.findOne({
     where: {
       id_post: postId,
       id_user: req.user.id,
-      isLike: isLike
     }
-  })
+  });
 
-  if (!created) {
-    return res.status(400).json({ msg: "Anda sudah menyukai postingan ini" });
+  if (existingLike) {
+   
+    await existingLike.update({ isLike: isLike });
+    return res.json({ msg: `post like ${isLike}` });
+  } else {
+   
+    const newLike = await likesModel.create({
+      id_post: postId,
+      id_user: req.user.id,
+      isLike: isLike
+    });
+
+    return res.json({
+      msg: "like post",
+      data: newLike
+    });
   }
+});
 
-  return res.json({
-    msg: "Postingan disukai",
-    data: like
-  })
-
-})
 
 router.get('/forum/posts/find', async (req, res) => {
   const { search } = req.query;
